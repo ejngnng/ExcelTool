@@ -60,11 +60,11 @@ namespace PriceCalcu
                 dt.Rows.Add();
             }
 
-            for(int i=0; i<origin_rows; i++)
+            for(int i=0; i<origin_rows-1; i++)
             {
                 for(int j=0; j<origin_cols; j++)
                 {
-                    dt.Rows[i][j+1] = origin.Rows[i][j].ToString();
+                    dt.Rows[i][j+1] = origin.Rows[i+1][j].ToString();
                 }
             }
 
