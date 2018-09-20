@@ -146,5 +146,28 @@ namespace PriceCalcu
             }
 
         }
+
+        private void TXT_RATE_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                DataTable dt = (DataTable)dataGridView1.DataSource;
+                double avg = double.Parse(TXT_AVG.Text.ToString());
+                double rate = double.Parse(TXT_RATE.Text.ToString());
+                TXT_BASE.Text = (avg * rate / 100).ToString("f3");
+                for (int i = 0; i < (SourceData.Rows.Count); i++)
+                {
+                    CondicationFanbiOne calcu = new CondicationFanbiOne(double.Parse(SourceData.Rows[i][2].ToString()));
+                    calcu.setAverage(double.Parse(TXT_AVG.Text.ToString()));
+                    calcu.setRate(double.Parse(TXT_RATE.Text.ToString()));
+                    Console.WriteLine("{0}, res: {1}", i, calcu.getResult().ToString());
+                    dt.Rows[i][3] = calcu.getResult().ToString("f2");
+                }
+            }
+            catch
+            {
+                return;
+            }
+        }
     }
 }

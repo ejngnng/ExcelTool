@@ -235,6 +235,7 @@
             this.TXT_RATE.Name = "TXT_RATE";
             this.TXT_RATE.Size = new System.Drawing.Size(71, 21);
             this.TXT_RATE.TabIndex = 5;
+            this.TXT_RATE.TextChanged += new System.EventHandler(this.TXT_RATE_TextChanged);
             // 
             // dataGridView1
             // 
