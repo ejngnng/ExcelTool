@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PriceCalcu
+namespace PriceCalcu.util
 {
     class CondicationFanbiOne
     {
