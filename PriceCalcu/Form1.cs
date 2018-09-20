@@ -104,30 +104,47 @@ namespace PriceCalcu
 
         private void tabControlIndex1_Process()
         {
-            DataTable dt = new DataTable();
-            dt = SourceData;
-            DataColumn Score = new DataColumn();
-            Score.ColumnName = "价格得分";
-            dt.Columns.Add(Score);
-
-            DataColumn Sort = new DataColumn();
-            Sort.ColumnName = "排名";
-            dt.Columns.Add(Sort);
-
-            dataGridView1.DataSource = SourceData;
-
-            List<double> Total = new List<double>();
-            
-            for(int i=0; i<(SourceData.Rows.Count-1); i++)
+            try
             {
-                Total.Add(double.Parse(SourceData.Rows[i][2].ToString()));
+                DataTable dt = new DataTable();
+                dt = SourceData;
+                DataColumn Score = new DataColumn();
+                Score.ColumnName = "价格得分";
+                dt.Columns.Add(Score);
+
+                DataColumn Sort = new DataColumn();
+                Sort.ColumnName = "排名";
+                dt.Columns.Add(Sort);
+
+                dataGridView1.DataSource = SourceData;
+
+                List<double> Total = new List<double>();
+
+                for (int i = 0; i < (SourceData.Rows.Count - 1); i++)
+                {
+                    Total.Add(double.Parse(SourceData.Rows[i][2].ToString()));
+                }
+
+                Console.WriteLine("avg: {0}", Total.Average().ToString());
+                TXT_AVG.Text = Total.Average().ToString("f3");
+                double avg = double.Parse(TXT_AVG.Text.ToString());
+                double rate = double.Parse(TXT_RATE.Text.ToString());
+                TXT_BASE.Text = (avg * rate / 100).ToString("f3");
+
+                for(int i=0; i<(SourceData.Rows.Count - 1); i++)
+                {
+                    CondicationFanbiOne calcu = new CondicationFanbiOne(double.Parse(SourceData.Rows[i][2].ToString()));
+                    calcu.setAverage(double.Parse(TXT_AVG.Text.ToString()));
+                    calcu.setRate(double.Parse(TXT_RATE.Text.ToString()));
+                    Console.WriteLine("{0}, res: {1}", i, calcu.getResult().ToString());
+                    dt.Rows[i][3] = calcu.getResult().ToString("f2");
+                }
             }
-            
-            Console.WriteLine("avg: {0}", Total.Average().ToString());
-            TXT_AVG.Text = Total.Average().ToString("f3");
-            double avg = double.Parse(TXT_AVG.Text.ToString());
-            double rate = double.Parse(TXT_RATE.Text.ToString());
-            TXT_BASE.Text = (avg * rate / 100).ToString("f3");
+            catch
+            {
+                return;
+            }
+
         }
     }
 }

@@ -10,7 +10,6 @@ namespace PriceCalcu
     {
         private double price;
         private double price_average = 0;
-        private double price_base = 0;
         private double price_rate = 0;
 
         public CondicationFanbiOne(double price)
@@ -23,11 +22,6 @@ namespace PriceCalcu
             this.price_average = value;
         }
 
-        public void setBase(double value)
-        {
-            this.price_base = value;
-        }
-
         public void setRate(double value)
         {
             this.price_rate = value;
@@ -35,8 +29,10 @@ namespace PriceCalcu
 
         public double getResult()
         {
-            double avg = price_average * price_rate;
-            if(this.price > (avg))
+            double avg = price_average * price_rate / 100;
+            Console.WriteLine("price_average: {0}", price_average);
+            Console.WriteLine("get result avg: {0}", avg);
+            if(this.price > avg)
             {
                 return (100 * (avg / price));
             }
