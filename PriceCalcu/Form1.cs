@@ -57,7 +57,7 @@ namespace PriceCalcu
             int origin_cols = origin.Columns.Count;
             Console.WriteLine("rows: {0}, coloumn: {1}", origin_rows, origin_cols);
             Console.WriteLine("rows 1, col 1: {0}", origin.Rows[0][1].ToString());
-            for(int i=0; i<(origin_rows); i++)
+            for(int i=0; i<(origin_rows-1); i++)
             {
                 dt.Rows.Add();
             }
@@ -131,7 +131,7 @@ namespace PriceCalcu
                 double rate = double.Parse(TXT_RATE.Text.ToString());
                 TXT_BASE.Text = (avg * rate / 100).ToString("f3");
 
-                for(int i=0; i<(SourceData.Rows.Count - 1); i++)
+                for(int i=0; i<(SourceData.Rows.Count); i++)
                 {
                     CondicationFanbiOne calcu = new CondicationFanbiOne(double.Parse(SourceData.Rows[i][2].ToString()));
                     calcu.setAverage(double.Parse(TXT_AVG.Text.ToString()));
