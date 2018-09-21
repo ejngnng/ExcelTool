@@ -140,6 +140,18 @@ namespace PriceCalcu
                     Console.WriteLine("{0}, res: {1}", i, calcu.getResult().ToString());
                     dt.Rows[i][3] = calcu.getResult().ToString("f2");
                 }
+
+                double[] score = new double[dt.Rows.Count];
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    score[i] = double.Parse(dt.Rows[i][3].ToString());
+                }
+
+                PriceSort sort = new PriceSort(score);
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    dt.Rows[i][4] = sort.getNumber(double.Parse(dt.Rows[i][3].ToString()));
+                }
             }
             catch
             {
@@ -164,6 +176,19 @@ namespace PriceCalcu
                     Console.WriteLine("{0}, res: {1}", i, calcu.getResult().ToString());
                     dt.Rows[i][3] = calcu.getResult().ToString("f2");
                 }
+
+                double[] score = new double[dt.Rows.Count];
+                for(int i=0; i< dt.Rows.Count; i++)
+                {
+                    score[i] = double.Parse(dt.Rows[i][3].ToString());
+                }
+
+                PriceSort sort = new PriceSort(score);
+                for(int i=0; i<dt.Rows.Count; i++)
+                {
+                    dt.Rows[i][4] = sort.getNumber(double.Parse(dt.Rows[i][3].ToString()));
+                }
+
             }
             catch
             {
